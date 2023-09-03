@@ -1,12 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+namespace my_Ecommerce_App.Models;
 
-namespace my_Ecommerce_App.Models
+public class Category
 {
-    public class Category
-    {
-        
-    }
+
+    public int ID { get; set; }
+    public string? Name { get; set; }
+
+    public virtual ICollection<ProductCategory>? ProductCategorys { get; set; }
+
 }
