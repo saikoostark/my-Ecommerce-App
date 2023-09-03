@@ -1,0 +1,41 @@
+@using my_Ecommerce_App.ViewModels
+@model LoginUser
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<form asp-controller="Account" asp-action="Login" method="post" class="mx-auto w-50 shadow-sm  p-3 mb-5 mt-5 rounded row g-3">
+
+    @Html.HiddenFor(m => m.ReturnUrl)
+    <div class="col-md-12">
+        <label asp-for="UserNameOrEmail" class="form-label">Username or Email</label>
+        <input asp-for="UserNameOrEmail" class="form-control">
+        <span class="text-danger" asp-validation-for="UserNameOrEmail"></span>
+    </div>
+
+    <div class="col-md-12">
+        <label asp-for="Password" class="form-label">Password</label>
+        <input asp-for="Password" class="form-control">
+        <span class="text-danger" asp-validation-for="Password">@ViewBag?.InvalidCred</span>
+
+    </div>
+
+    <div class="form-check">
+        <input asp-for="RememberMe" class="form-check-input">
+        <label asp-for="RememberMe">
+            Remember me
+        </label>
+    </div>
+
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary col-12">Sign in</button>
+    </div>
+    <div class="col-12 shadow-lg p-1 mb-1  rounded">
+    </div>
+
+    <div class="col-12">
+        <p>Create new account <a asp-controller="Account" asp-action="Register">Sign up</a></p>
+    </div>
+
+</form>

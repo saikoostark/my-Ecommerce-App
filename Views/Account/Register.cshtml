@@ -1,0 +1,63 @@
+@using my_Ecommerce_App.ViewModels
+@model RegisterUser
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+
+<form asp-controller="Account" asp-action="Register" method="post" class="mx-auto w-50 shadow-sm  p-3 mb-5 mt-5 rounded row g-3">
+
+    <div class="col-md-6">
+        <label asp-for="UserName" class="form-label">Username</label>
+        <div class="input-group has-validation">
+            <span class="input-group-text">@@</span>
+            <input class="form-control" asp-for="UserName">
+            <span class="text-danger" asp-validation-for="UserName"></span>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="Email" class="form-label">Email</label>
+        <input asp-for="Email" class="form-control" placeholder="example@email.com">
+        <span class="text-danger" asp-validation-for="Email"></span>
+
+    </div>
+
+
+    <div class="col-12">
+        <label asp-for="Address" class="form-label">Address</label>
+        <input asp-for="Address" class="form-control" placeholder="1234 Main St">
+        <span class="text-danger" asp-validation-for="Address"></span>
+    </div>
+
+    <div class="col-12">
+        <label asp-for="Phone" class="form-label">Phone
+            Number</label>
+        <input asp-for="Phone" class="form-control" placeholder="+123456789">
+        <span class="text-danger" asp-validation-for="Phone"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="Password" class="form-label">Password</label>
+        <input asp-for="Password" type="Password" class="form-control">
+        <span class="text-danger" asp-validation-for="Password"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="ConfirmPassword" class="form-label">Confirm Password</label>
+        <input asp-for="ConfirmPassword" type="Password" class="form-control">
+        <span class="text-danger" asp-validation-for="ConfirmPassword"></span>
+    </div>
+
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary col-12">Sign up</button>
+    </div>
+    <div class="col-12 shadow-lg p-1 mb-1  rounded">
+    </div>
+
+    <div class="col-12">
+        <p>Already have an account? <a asp-controller="Account" asp-action="Login">Sign in</a></p>
+    </div>
+
+</form>

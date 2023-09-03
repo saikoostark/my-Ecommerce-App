@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+
 namespace my_Ecommerce_App;
 
 public class Program
@@ -8,7 +10,16 @@ public class Program
 
         // Add services to the container.
         builder.Services.AddControllersWithViews();
-
+        builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+        .AddCookie(options =>
+        {
+            options.LoginPath = "/Account/Login";
+            options.LogoutPath = "/Account/Logout";
+            options.Cookie.Name = "auth";
+            options.Cookie.HttpOnly = true;
+            options.SlidingExpiration = true;
+            options.AccessDeniedPath = "/Forbidden/";
+        });
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
@@ -21,10 +32,11 @@ public class Program
 
         app.UseHttpsRedirection();
         app.UseStaticFiles();
-
         app.UseRouting();
 
+        app.UseAuthentication();
         app.UseAuthorization();
+        app.UseCookiePolicy();
 
         app.MapControllerRoute(
             name: "default",
