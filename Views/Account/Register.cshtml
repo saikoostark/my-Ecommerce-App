@@ -10,11 +10,11 @@
 
     <div class="col-md-6">
         <label asp-for="UserName" class="form-label">Username</label>
-        <div class="input-group has-validation">
+        <div class="input-group">
             <span class="input-group-text">@@</span>
             <input class="form-control" asp-for="UserName">
-            <span class="text-danger" asp-validation-for="UserName"></span>
         </div>
+        <span class="text-danger" asp-validation-for="UserName"></span>
     </div>
 
     <div class="col-md-6">

@@ -1,5 +1,7 @@
+@using System.Security.Claims
 @{
     ViewData["Title"] = "Profile";
+    var x = User.FindFirst(ClaimTypes.Role);
 }
 
 <h1>@ViewData["Title"]</h1>

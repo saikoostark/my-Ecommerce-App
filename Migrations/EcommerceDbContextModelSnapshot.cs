@@ -50,7 +50,7 @@ namespace my_Ecommerce_App.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("CartItem");
+                    b.ToTable("CartItems");
                 });
 
             modelBuilder.Entity("my_Ecommerce_App.Models.Category", b =>
@@ -66,7 +66,7 @@ namespace my_Ecommerce_App.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Category");
+                    b.ToTable("Categorys");
                 });
 
             modelBuilder.Entity("my_Ecommerce_App.Models.Order", b =>
@@ -90,7 +90,7 @@ namespace my_Ecommerce_App.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("Order");
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("my_Ecommerce_App.Models.Product", b =>
@@ -121,7 +121,7 @@ namespace my_Ecommerce_App.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Product");
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("my_Ecommerce_App.Models.ProductCategory", b =>
@@ -144,7 +144,7 @@ namespace my_Ecommerce_App.Migrations
 
                     b.HasIndex("ProductID");
 
-                    b.ToTable("ProductCategory");
+                    b.ToTable("ProductCategorys");
                 });
 
             modelBuilder.Entity("my_Ecommerce_App.Models.User", b =>
@@ -185,6 +185,30 @@ namespace my_Ecommerce_App.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Address = "rgregrgrjgire",
+                            Email = "saikoo@gmail.com",
+                            HashedPassword = "wvL8qa2kQ1CM079uSadxnKlHCQ5AJVoTtSVS6ZhteCY=",
+                            Phone = "+201125001709",
+                            Role = "AdminUser",
+                            Salt = "468ZsBrCH3OaeQzWfAFM2A==",
+                            UserName = "saikoo10"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Address = "rgregrgrjgire",
+                            Email = "saikoo@gmail.com",
+                            HashedPassword = "iWf6IR8ccSfhsSGd8YJiHhkFmb/UfYt3eEMcslpx71U=",
+                            Phone = "+201125001709",
+                            Role = "RegularUser",
+                            Salt = "PBjzuE2xV1o0F/QAYTVLzQ==",
+                            UserName = "saikoo123"
+                        });
                 });
 
             modelBuilder.Entity("my_Ecommerce_App.Models.CartItem", b =>

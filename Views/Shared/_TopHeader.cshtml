@@ -1,0 +1,96 @@
+@{
+    var Name = User?.Identity!.Name ?? "Guest";
+}
+
+
+<div class="d-flex justify-content-between align-items-center py-4 mx-4">
+
+    <div>
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="/images/logo6.jpg" style="width:130px;height:50px;" alt=""></a>
+    </div>
+
+
+
+    <div class="my-search-div d-flex w-50 my-border rounded-2 align-items-center h-100">
+        <form class="d-flex w-100" role="search">
+            <div class="d-flex w-100 py-1 ">
+                <select class="cat-select border border-0 ms-3 px-1 text-truncate" style="max-width: 20%;">
+                    <option value="1">category1</option>
+                    <option value="2">category2</option>
+                    <option value="2">category2</option>
+                    <option value="3">category3</option>
+                    <option value="4">category4</option>
+                    <option value="5">category5category5category5</option>
+                </select>
+
+
+                <input class="form-control my-search-input" type="search" placeholder="Enter keywords to search..." aria-label="Search">
+
+            </div>
+            <button class="my-search-btn px-3" type="submit"><i class="bi bi-search fs-4"></i></button>
+        </form>
+    </div>
+
+
+    <div class="position-relative border border-dark-subtle rounded-4">
+        <div class="position-absolute top-50 start-0 translate-middle icon-wrapper border border-dark-subtle rounded-circle d-flex justify-content-center align-items-center bg-white">
+            <i class="bi bi-person fs-4 mx-auto"></i>
+        </div>
+
+        <div class=" py-3 px-4">
+            <p class="my-0" style="font-size: 13px;">Hello @Name</p>
+
+
+
+            @if (User!.Identity!.IsAuthenticated)
+            {
+                <div class="dropdown">
+                    <p class="my-0 dropdown-toggle">My Account</p>
+                    <ul class="dropdown-menu py-2">
+                        <li>
+                            <a class="dropdown-item" asp-controller="Account" asp-action="Profile">Profile</a>
+                        </li>
+                        <li><a class="dropdown-item" href="#">My Wish List</a></li>
+                        <li>
+                            <a class="dropdown-item" asp-controller="Account" asp-action="Logout">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            }
+            else
+            {
+                <div class="dropdown">
+                    <p class="my-0 dropdown-toggle">My Account</p>
+                    <ul class="dropdown-menu py-2">
+                        <li>
+                            <a class="dropdown-item" asp-controller="Account" asp-action="Register">Register</a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item" asp-controller="Account" asp-action="Login">Login</a>
+                        </li>
+                    </ul>
+                </div>
+            }
+
+
+        </div>
+    </div>
+
+
+
+    <div class="position-relative border border-dark-subtle rounded-4">
+        <div class="position-absolute top-50 start-0 translate-middle icon-wrapper border border-dark-subtle rounded-circle d-flex justify-content-center align-items-center bg-white">
+            <i class="bi bi-cart2 fs-4 mx-auto"></i>
+        </div>
+
+        <div class=" py-3 px-4">
+            <p class="my-0">Hello Guest</p>
+            <p class="my-0">hek</p>
+        </div>
+    </div>
+
+
+
+
+</div>

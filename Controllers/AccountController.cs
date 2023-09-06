@@ -12,17 +12,18 @@ namespace my_Ecommerce_App.Controllers
     public class AccountController : Controller
     {
         private readonly EcommerceDbContext dbContext;
-        private readonly ILogger<AccountController> _logger;
 
         public AccountController(ILogger<AccountController> logger)
         {
-            _logger = logger;
             dbContext = new();
         }
 
         [HttpGet]
         public IActionResult Register()
         {
+            if (HttpContext.User.Identity!.IsAuthenticated)
+                return LocalRedirect("/");
+
             RegisterUser user = new();
             return View(user);
         }
@@ -57,12 +58,16 @@ namespace my_Ecommerce_App.Controllers
         [HttpGet]
         public IActionResult Login(string returnUrl = "/")
         {
+            if (HttpContext.User.Identity!.IsAuthenticated)
+                return LocalRedirect("/");
+
             LoginUser user = new()
             {
                 ReturnUrl = returnUrl
             };
             return View(user);
         }
+
 
         [HttpPost]
         public async Task<IActionResult> Login(LoginUser user)
@@ -96,6 +101,7 @@ namespace my_Ecommerce_App.Controllers
 
             var claims = new List<Claim>(){
                 new(ClaimTypes.NameIdentifier, loggedUser!.UserName!),
+                new(ClaimTypes.Name, loggedUser!.UserName!),
                 new(ClaimTypes.Email, loggedUser!.Email!),
                 new(ClaimTypes.Role, loggedUser!.Role!),
             };
@@ -107,6 +113,11 @@ namespace my_Ecommerce_App.Controllers
                 IsPersistent = user!.RememberMe,
             }
             );
+
+            if (loggedUser!.Role!.Equals("AdminUser"))
+            {
+                return RedirectToAction("Index", "Home", "Admin");
+            }
 
             return LocalRedirect(user?.ReturnUrl ?? "/");
         }

@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3 py-0" style="background-color: #7D5BB8;">
+
+    <div class="container-fluid d-flex justify-content-between">
+
+        <div class="w-25">
+            <div class="dropdown w-25">
+                <p class="my-0 dropdown-toggle text-light">
+                    <i class="bi bi-layout-text-sidebar me-1"></i>Shop by Categories
+                </p>
+                <ul class="dropdown-menu py-2">
+                    <li>
+                        <a class="dropdown-item" asp-controller="Account" asp-action="Profile">Profile</a>
+                    </li>
+                    <li><a class="dropdown-item" href="#">My Wish List</a></li>
+                    <li>
+                        <a class="dropdown-item" asp-controller="Account" asp-action="Logout">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="w-50">
+            <ul class="navbar-nav d-flex justify-content-between w-100">
+                <li class="nav-item">
+                    <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                </li>
+                <li class="nav-item d-flex">
+                    <a class="nav-link text-light" asp-area="Admin" asp-controller="Product" asp-action="Add">Shop</a>
+                </li>
+                <li class="nav-item d-flex">
+                    <a class="nav-link text-light" asp-area="Admin" asp-controller="Product" asp-action="Index">Categories</a>
+                </li>
+                <li class="nav-item d-flex">
+                    <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">About Us</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="w-25 nav-left d-flex justify-content-center position-relative">
+
+            <div class="w-75 nav-left-inner position-absolute top-50 start-50 translate-middle py-2 rounded-5">
+                <p class="display-me-none">hi i am saikoo</p>
+            </div>
+        </div>
+
+    </div>
+</nav>
