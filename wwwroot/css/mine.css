@@ -155,3 +155,62 @@ body:has(.my-search-btn:hover) .cat-select {
 .display-me-none{
     visibility: hidden;
 }
+
+
+
+.sidebar-container {
+    position: absolute;
+    height: 75vh; /* Adjust the height as needed */
+    overflow-y: auto;
+    background-color: #f6f6f6;
+    width:30vw;
+    height:100vh;
+    /* transform: translateX(-385px); */
+}
+
+.sidebar-container::-webkit-scrollbar-corner {
+    /* display: none; */
+    border-radius: 50%;
+}
+
+::-webkit-scrollbar-thumb {
+    /* display: none; */
+    border-radius: 50%;
+}
+
+
+
+.my-side-ul{
+    gap:15px;
+}
+
+
+.my-side-ul li > button{
+    font-size: 19px;
+}
+
+.my-inner-side-ul li{
+    margin-bottom: 10px;
+    margin-top: 10px;
+    width: 65%;
+}
+
+.my-inner-side-ul li a{
+    opacity: 0.5;
+    font-size: 15px;
+    width: 100%;
+    padding: 8px 10px 8px 10px;
+    outline: 2px solid transparent;
+    font-weight: 800;
+    transition: 0.2s;
+}
+
+.my-inner-side-ul li:hover a{
+    outline: 2px solid #e3e3e3;
+    opacity: 1;
+}
+.my-toggle{
+    font-size: 16px;
+    width: 70%;
+}
+
