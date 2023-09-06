@@ -145,7 +145,7 @@ body:has(.my-search-btn:hover) .cat-select {
 .nav-left-inner{
     background: radial-gradient(ellipse farthest-corner at left bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%),
             radial-gradient(ellipse farthest-corner at right top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     background-size: 100% 100%;
     animation: spin 1s linear infinite;
 
@@ -165,7 +165,7 @@ body:has(.my-search-btn:hover) .cat-select {
     background-color: #f6f6f6;
     width:30vw;
     height:100vh;
-    /* transform: translateX(-385px); */
+    transform: translateX(-385px);
 }
 
 .sidebar-container::-webkit-scrollbar-corner {
@@ -214,3 +214,12 @@ body:has(.my-search-btn:hover) .cat-select {
     width: 70%;
 }
 
+
+.clickable{
+    cursor: pointer;
+}
+
+.my-search-input-admin{
+    border: none !important;
+    margin-left: 5px;
+}
