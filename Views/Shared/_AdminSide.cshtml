@@ -1,4 +1,4 @@
-<div class="p-4 sidebar-container">
+<div class="p-4 sidebar-container bg-white w-25">
     <ul class="list-unstyled ps-0 pb-5  d-flex flex-column h-75 my-side-ul" id="test1">
 
         <li class="mb-3">
@@ -7,56 +7,97 @@
             </div>
         </li>
 
+        @* <li class="mb-1">
+        <button class="btn btn-toggle my-toggle d-inline-flex align-items-center rounded border-0 collapsed fs-5" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">
+        Home
+        </button>
+        <div class="collapse" id="home-collapse" data-bs-parent="#test1">
+        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small my-inner-side-ul">
+        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded fs-6">Overview</a></li>
+        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded fs-6">Updates</a></li>
+        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded fs-6">Reports</a></li>
+        </ul>
+        </div>
+        </li> *@
         <li class="mb-1">
-            <button class="btn btn-toggle my-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
-                Home
-            </button>
-            <div class="collapse" id="home-collapse" data-bs-parent="#test1">
-                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small my-inner-side-ul">
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Overview</a></li>
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Updates</a></li>
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Reports</a></li>
-                </ul>
-            </div>
-        </li>
-        <li class="mb-1">
-            <button class="btn btn-toggle my-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
+            <button class="btn btn-toggle my-toggle d-inline-flex align-items-center rounded border-0 collapsed fs-5" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
                 Dashboard
             </button>
             <div class="collapse" id="dashboard-collapse" data-bs-parent="#test1">
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small my-inner-side-ul">
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Overview</a></li>
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Weekly</a></li>
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Monthly</a></li>
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Annually</a></li>
+                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded fs-6">Overview</a></li>
+                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded fs-6">Weekly</a></li>
+                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded fs-6">Monthly</a></li>
+                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded fs-6">Annually</a></li>
                 </ul>
             </div>
         </li>
+
+
         <li class="mb-1">
-            <button class="btn btn-toggle my-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
+            <button class="btn btn-toggle my-toggle d-inline-flex align-items-center rounded border-0 collapsed fs-5" data-bs-toggle="collapse" data-bs-target="#categories-collapse" aria-expanded="false">
+                Categories
+            </button>
+            <div class="collapse" id="categories-collapse" data-bs-parent="#test1">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small my-inner-side-ul">
+                    <li>
+                        <a asp-area="Admin" asp-controller="Category" asp-action="Add" class="link-body-emphasis d-inline-flex text-decoration-none rounded fs-6">
+                            Add new</a>
+                    </li>
+                    <li>
+                        <a asp-area="Admin" asp-controller="Category" asp-action="ViewAll" class="link-body-emphasis d-inline-flex text-decoration-none rounded fs-6">
+                            View all</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+
+        <li class="mb-1">
+            <button class="btn btn-toggle my-toggle d-inline-flex align-items-center rounded border-0 collapsed fs-5" data-bs-toggle="collapse" data-bs-target="#product-collapse" aria-expanded="false">
+                products
+            </button>
+            <div class="collapse" id="product-collapse" data-bs-parent="#test1">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small my-inner-side-ul">
+                    <li>
+                        <a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded fs-6">
+                            Add new product</a>
+                    </li>
+                    <li>
+                        <a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded fs-6">
+                            View all products</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+
+
+        <li class="mb-1">
+            <button class="btn btn-toggle my-toggle d-inline-flex align-items-center rounded border-0 collapsed fs-5" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
                 Orders
             </button>
             <div class="collapse" id="orders-collapse" data-bs-parent="#test1">
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small my-inner-side-ul">
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">New</a></li>
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Processed</a></li>
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Shipped</a></li>
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Returned</a></li>
+                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded fs-6">New</a></li>
+                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded fs-6">Processed</a></li>
+                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded fs-6">Shipped</a></li>
+                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded fs-6">Returned</a></li>
                 </ul>
             </div>
         </li>
 
         <li class="border-top my-3"></li>
         <li class="mb-1">
-            <button class="btn btn-toggle my-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
+            <button class="btn btn-toggle my-toggle d-inline-flex align-items-center rounded border-0 collapsed fs-5" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
                 Account
             </button>
             <div class="collapse" id="account-collapse" data-bs-parent="#test1">
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small my-inner-side-ul">
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">New...</a></li>
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Profile</a></li>
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Settings</a></li>
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Sign out</a></li>
+                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded fs-6">New...</a></li>
+                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded fs-6">Profile</a></li>
+                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded fs-6">Settings</a></li>
+                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded fs-6">Sign out</a></li>
                 </ul>
             </div>
         </li>

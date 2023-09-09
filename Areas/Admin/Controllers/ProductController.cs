@@ -1,25 +1,23 @@
-using System.Net;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace my_Ecommerce_App.Admin.Controllers
+namespace my_Ecommerce_App.Areas.Admin.Controllers;
+
+
+
+[Area("Admin")]
+[Authorize(Roles = "AdminUser")]
+public class ProductController : Controller
 {
 
-
-    [Area("Admin")]
-    [Authorize(Roles = "AdminUser")]
-    public class ProductController : Controller
+    public IActionResult Index()
     {
-
-        public IActionResult Index()
-        {
-            return View();
-        }
+        return View();
+    }
 
 
-        public IActionResult Add()
-        {
-            return View();
-        }
+    public IActionResult Add()
+    {
+        return View();
     }
 }

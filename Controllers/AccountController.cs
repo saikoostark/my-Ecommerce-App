@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using my_Ecommerce_App.Models;
 using my_Ecommerce_App.Utils;
 using my_Ecommerce_App.ViewModels;
+using my_Ecommerce_App.Areas.Admin.Controllers;
 
 namespace my_Ecommerce_App.Controllers
 {
@@ -116,7 +117,7 @@ namespace my_Ecommerce_App.Controllers
 
             if (loggedUser!.Role!.Equals("AdminUser"))
             {
-                return RedirectToAction("Index", "Home", "Admin");
+                return RedirectToAction("Index", "Home", new { area = "Admin" });
             }
 
             return LocalRedirect(user?.ReturnUrl ?? "/");

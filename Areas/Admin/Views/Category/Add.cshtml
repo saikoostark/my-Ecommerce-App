@@ -1,0 +1,88 @@
+@model Category
+@{
+    ViewData["Title"] = "Add Category";
+
+}
+
+@section CustomHead {
+    <style>
+        .uploadButton {
+            overflow: hidden;
+            background-image: url("/images/add_image.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center center;
+            height: 190px;
+        }
+
+        .uploadButton>input {
+            background-color: transparent;
+            cursor: pointer;
+            height: 300px;
+            transform: translateY(-30px);
+        }
+
+        #imageContainer {
+            width: 300px;
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: none;
+
+        }
+
+        .my-img-drop {
+            visibility: hidden;
+        }
+
+        @*.dropdown:hover.dropdown-menu{animation-name:animate2;animation-duration:0.7s;animation-fill-mode:forwards;}@@keyframesanimate2{0%{visibility:visible;transform:translateY(20px);opacity:0;}100%{visibility:visible;transform:translateY(-20px);opacity:1;}}.dropdown-item{padding:7px;}.dropdown-item:hover,.dropdown-item:focus,.dropdown-item.active{border:none;color:red;background-color:white;padding:7px;}.dropdown-item:focus,.dropdown-item.active{background-color:white;}*@
+    </style>
+}
+
+
+<h1 class="bg-white px-4 py-3 fs-1 fw-bolder rounded-4 my-3 shadow-sm">@ViewData["Title"] </h1>
+
+<div class="bg-white h-50 px-4 py-4 fw-bolder rounded-4 shadow-sm">
+
+
+    <form class="d-flex w-100 h-100 justify-content-center align-items-center" enctype="multipart/form-data" action="Add" method="post">
+
+
+
+        <div>
+            <div class="mb-3 position-relative">
+                <label for="image" class="form-label">Category image</label>
+                <div class="uploadButton mb-3 ">
+                    <input name="ImgFile" type="file" class="image-uploader" id="image" accept="image/*">
+
+                    <div class="dropdown dropend position-absolute top-0 end-0 my-img-drop">
+                        <button class="btn btn-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><button class="dropdown-item my-rm-btn">Remove</button></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label">Category name</label>
+                <input asp-for="Name" class="form-control" id="cat-name">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+
+    </form>
+
+
+
+
+
+</div>
+
+
+@section CustomBody{
+    <script src="~/js/img-uploader.js"></script>
+}

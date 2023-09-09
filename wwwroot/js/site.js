@@ -1,4 +1,16 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿$(".bar-btn").click(function () { 
+    $(".side-layer").css("visibility", "visible");
+    $(".sidebar-container").css("transform", "translateX(0px)");
+});
 
-// Write your JavaScript code.
+
+$(".side-layer").click(function () { 
+    $(".side-layer").css("visibility", "hidden");
+    $(".sidebar-container").css("transform", "translateX(-385px)");
+});
+
+
+$(".image").change(function (e) { 
+    $(".uploadButton").css("background-image", `url(${1})`);
+    
+});

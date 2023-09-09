@@ -1,0 +1,31 @@
+:root {
+    --my-primary-color: #7D5BB8;
+}
+
+.my-border {
+    border: 2px solid var(--my-primary-color);
+}
+
+.my-search-input:focus,
+.cat-select:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+
+.my-search-btn {
+    border: none;
+    background-color: transparent;
+    transition-duration: 0.3s;
+}
+
+.my-search-btn:hover {
+    background-color: var(--my-primary-color);
+    color: white;
+}
+
+
+.dropdown-item:focus{
+    background-color: transparent;
+    color: inherit;
+}

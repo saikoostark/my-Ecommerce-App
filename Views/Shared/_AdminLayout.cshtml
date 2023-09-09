@@ -5,14 +5,40 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <partial name="_Allcss" />
+        <link rel="stylesheet" href="~/css/admin.css" />
+
+  @* <link href="https://fonts.cdnfonts.com/css/helvetica-neue-55" rel="stylesheet"> *@
+
+    <style>
+
+      *{
+        font-family: 'Helvetica Neue', sans-serif;
+      }
+    </style>
+
+
+  @RenderSection("CustomHead", required: false)
+
+
     </head>
-    <body>
+    <body style="background-color:#f7f7f7">
+
+      <div class="side-layer">
+        <p class="visually-hidden">hello i am saikoo</p>
+      </div>
+
 
       <partial name="_AdminSide" />
       <partial name="_AdminNav" />
 
-      @RenderBody()
-      
+
+      <main class="mx-4">
+    @RenderBody()
+      </main>
+
     <partial name="_Alljs" />
+
+  @RenderSection("CustomBody", required: false)
+
     </body>
 </html>  

@@ -61,8 +61,13 @@ namespace my_Ecommerce_App.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("ID");
 
@@ -192,10 +197,10 @@ namespace my_Ecommerce_App.Migrations
                             ID = 1,
                             Address = "rgregrgrjgire",
                             Email = "saikoo@gmail.com",
-                            HashedPassword = "wvL8qa2kQ1CM079uSadxnKlHCQ5AJVoTtSVS6ZhteCY=",
+                            HashedPassword = "fJP2HdNueoLl+YvcRG6b5bnWPvfbMXIHoD2ZWUV0EwI=",
                             Phone = "+201125001709",
                             Role = "AdminUser",
-                            Salt = "468ZsBrCH3OaeQzWfAFM2A==",
+                            Salt = "tChghGt6VF2J0inVceW79w==",
                             UserName = "saikoo10"
                         },
                         new
@@ -203,10 +208,10 @@ namespace my_Ecommerce_App.Migrations
                             ID = 2,
                             Address = "rgregrgrjgire",
                             Email = "saikoo@gmail.com",
-                            HashedPassword = "iWf6IR8ccSfhsSGd8YJiHhkFmb/UfYt3eEMcslpx71U=",
+                            HashedPassword = "vD1qxbWR0F5K7QDxYcArc3HUlIhs2YWCE9WM5Gp1pQs=",
                             Phone = "+201125001709",
                             Role = "RegularUser",
-                            Salt = "PBjzuE2xV1o0F/QAYTVLzQ==",
+                            Salt = "ZE4igymVdIAQSR3npGLC4A==",
                             UserName = "saikoo123"
                         });
                 });
