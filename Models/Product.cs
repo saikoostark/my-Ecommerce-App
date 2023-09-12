@@ -7,6 +7,8 @@ public class Product
 {
     public int ID { get; set; }
     public string? Name { get; set; }
+
+    [MaxLength(200)]
     public string? Description { get; set; }
 
     [Column(TypeName = "decimal(18, 2)")]
@@ -18,7 +20,7 @@ public class Product
 
     public byte[]? Image { get; set; }
 
-    public virtual ICollection<ProductCategory>? ProductCategorys { get; set; }
+    public virtual ICollection<Category>? Categorys { get; set; }
 
 
 }

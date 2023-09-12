@@ -1,0 +1,116 @@
+@model Product
+@{
+    ViewData["Title"] = "Add Product";
+
+}
+
+@section CustomHead {
+
+    <link rel="stylesheet" href="~/css/multi-select-tag.css">
+
+
+    <style>
+        .uploadButton {
+            overflow: hidden;
+            background-image: url("/images/add_image.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: 50% 0%;
+            height: 90px;
+        }
+
+        .uploadButton>input {
+            background-color: transparent;
+            cursor: pointer;
+            height: 140%;
+            width: 100%;
+            transform: translateY(-20%);
+        }
+
+        .my-img-drop {
+            visibility: hidden;
+        }
+    </style>
+}
+
+
+<h1 class="bg-white px-4 py-3 fs-1 fw-bolder rounded-4 my-3 shadow-sm">@ViewData["Title"] </h1>
+
+<div class="py-4 fw-bolder d-flex justify-content-center w-100">
+
+
+    <form class="d-flex w-100 h-100 justify-content-center align-items-center" enctype="multipart/form-data" action="Add" method="post">
+
+        <div class="mb-3 bg-white px-3 py-3 rounded-4 shadow-sm w-75">
+
+            <h4 class="px-2 py-2">Product Details</h4>
+
+
+            <div class="d-flex">
+
+                <div class="w-75">
+                    <div class="d-flex">
+                        <div class="w-50 px-2 my-2">
+                            <label asp-for="Name" class="form-label">name</label>
+                            <input asp-for="Name" class="form-control">
+                        </div>
+                        <div class="w-50 px-2 my-2">
+                            <label asp-for="Quantity" class="form-label">Quantity</label>
+                            <input asp-for="Quantity" class="form-control">
+                        </div>
+                    </div>
+                    <div class="d-flex">
+                        <div class="w-50 px-2  my-2">
+                            <label asp-for="Price" class="form-label">Price</label>
+                            <input asp-for="Price" class="form-control">
+                        </div>
+                        <div class="w-50 px-2  my-2">
+                            <label asp-for="DiscountPercentage" class="form-label">Discount</label>
+                            <input asp-for="DiscountPercentage" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-50 position-relative">
+                    <div class="uploadButton mb-3 h-100 ">
+                        <input name="ImgFile" type="file" class="image-uploader" id="image" accept="image/*">
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="px-2 my-2">
+                <select id="countries" multiple name="Categories">
+                    @foreach (Category cat in @ViewBag.Categories)
+                    {
+                        <option value="@cat.ID">@cat.Name</option>
+                    }
+                </select>
+
+            </div>
+
+            <div class="px-2 my-2">
+                <label asp-for="Description" class="form-label w-100">Description</label>
+                <textarea asp-for="Description" class="w-100" style="height: 10vh;"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary py-2">Submit</button>
+        </div>
+
+    </form>
+
+
+
+
+
+</div>
+
+
+@section CustomBody{
+    <script src="~/js/img-uploader.js"></script>
+    <script src="~/js/multi-select-tag.js"></script>
+    <script>
+        new MultiSelectTag('countries')  // id
+    </script>
+}

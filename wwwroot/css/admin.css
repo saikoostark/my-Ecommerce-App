@@ -13,7 +13,7 @@
     background-color: #f6f6f6;
     width:30vw;
     height:100vh;
-    z-index: 50;
+    z-index: 1001;
     transform: translateX(-385px);
     transition: 0.7s;
 }
@@ -85,7 +85,8 @@
     height: 100vh;
     background-color: #273241;
     opacity: 0.8;
-    visibility: hidden;    
+    visibility: hidden;
+    z-index: 1000;
 }
 
 /* .side-layer{

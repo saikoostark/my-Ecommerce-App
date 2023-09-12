@@ -21,7 +21,9 @@ public class CategoryController : Controller
     public IActionResult ViewAll()
     {
 
-        return View();
+
+
+        return View(DB.Categorys.ToList());
     }
 
 
@@ -41,6 +43,19 @@ public class CategoryController : Controller
         DB.Add(cat);
         DB.SaveChanges();
 
+        return RedirectToAction("ViewAll");
+    }
+
+
+    [HttpPost]
+    public IActionResult Delete(int ID)
+    {
+        var entityToDelete = DB.Categorys.Find(ID);
+        if (entityToDelete != null)
+        {
+            DB.Categorys.Remove(entityToDelete);
+            DB.SaveChanges();
+        }
         return RedirectToAction("ViewAll");
     }
 

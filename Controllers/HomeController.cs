@@ -1,25 +1,26 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using my_Ecommerce_App.Models;
+using my_Ecommerce_App.ViewModels;
 
 namespace my_Ecommerce_App.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
+    readonly EcommerceDbContext DB;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController()
     {
-        _logger = logger;
+        DB = new();
     }
     public IActionResult Index()
     {
-        return View();
+        var allCats = DB.Categorys.ToList();
+        var data = new HomeData() { Categories = allCats };
+        return View(data);
     }
-    public IActionResult Privacy()
-    {
-        return View();
-    }
+
+
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()

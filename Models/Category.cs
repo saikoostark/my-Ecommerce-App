@@ -7,11 +7,11 @@ public class Category
     public int ID { get; set; }
 
     [Required]
-    [MaxLength(20)]
+    [MaxLength(40)]
     public string? Name { get; set; }
 
     public byte[]? Image { get; set; }
 
-    public virtual ICollection<ProductCategory>? ProductCategorys { get; set; }
+    public virtual ICollection<Product>? Products { get; set; }
 
 }

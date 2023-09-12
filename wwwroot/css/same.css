@@ -6,6 +6,11 @@
     border: 2px solid var(--my-primary-color);
 }
 
+a{
+    text-decoration: none;
+    color: black;
+}
+
 .my-search-input:focus,
 .cat-select:focus {
     outline: none !important;

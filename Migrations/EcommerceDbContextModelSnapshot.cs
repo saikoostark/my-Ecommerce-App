@@ -22,6 +22,21 @@ namespace my_Ecommerce_App.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("CategoryProduct", b =>
+                {
+                    b.Property<int>("CategorysID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductsID")
+                        .HasColumnType("int");
+
+                    b.HasKey("CategorysID", "ProductsID");
+
+                    b.HasIndex("ProductsID");
+
+                    b.ToTable("CategoryProduct");
+                });
+
             modelBuilder.Entity("my_Ecommerce_App.Models.CartItem", b =>
                 {
                     b.Property<int>("ID")
@@ -66,8 +81,8 @@ namespace my_Ecommerce_App.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
 
                     b.HasKey("ID");
 
@@ -107,7 +122,8 @@ namespace my_Ecommerce_App.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<int>("DiscountPercentage")
                         .HasColumnType("int");
@@ -127,29 +143,6 @@ namespace my_Ecommerce_App.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("my_Ecommerce_App.Models.ProductCategory", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<int>("CategoryID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("CategoryID");
-
-                    b.HasIndex("ProductID");
-
-                    b.ToTable("ProductCategorys");
                 });
 
             modelBuilder.Entity("my_Ecommerce_App.Models.User", b =>
@@ -197,10 +190,10 @@ namespace my_Ecommerce_App.Migrations
                             ID = 1,
                             Address = "rgregrgrjgire",
                             Email = "saikoo@gmail.com",
-                            HashedPassword = "fJP2HdNueoLl+YvcRG6b5bnWPvfbMXIHoD2ZWUV0EwI=",
+                            HashedPassword = "pEoYUEeLv6e4bvCNGKGUrYyfkUg215qAYwGOf8Q1xzs=",
                             Phone = "+201125001709",
                             Role = "AdminUser",
-                            Salt = "tChghGt6VF2J0inVceW79w==",
+                            Salt = "mFeKhTpMtPIKDa2SEBDe6g==",
                             UserName = "saikoo10"
                         },
                         new
@@ -208,12 +201,27 @@ namespace my_Ecommerce_App.Migrations
                             ID = 2,
                             Address = "rgregrgrjgire",
                             Email = "saikoo@gmail.com",
-                            HashedPassword = "vD1qxbWR0F5K7QDxYcArc3HUlIhs2YWCE9WM5Gp1pQs=",
+                            HashedPassword = "PkYC6vb+ChNK4bmXojtUYOk9qaq1wIJq1uNxwDKklmw=",
                             Phone = "+201125001709",
                             Role = "RegularUser",
-                            Salt = "ZE4igymVdIAQSR3npGLC4A==",
+                            Salt = "8/qc6ZFJrfeysVjf4f5ljA==",
                             UserName = "saikoo123"
                         });
+                });
+
+            modelBuilder.Entity("CategoryProduct", b =>
+                {
+                    b.HasOne("my_Ecommerce_App.Models.Category", null)
+                        .WithMany()
+                        .HasForeignKey("CategorysID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("my_Ecommerce_App.Models.Product", null)
+                        .WithMany()
+                        .HasForeignKey("ProductsID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("my_Ecommerce_App.Models.CartItem", b =>
@@ -252,38 +260,9 @@ namespace my_Ecommerce_App.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("my_Ecommerce_App.Models.ProductCategory", b =>
-                {
-                    b.HasOne("my_Ecommerce_App.Models.Category", "Category")
-                        .WithMany("ProductCategorys")
-                        .HasForeignKey("CategoryID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("my_Ecommerce_App.Models.Product", "Product")
-                        .WithMany("ProductCategorys")
-                        .HasForeignKey("ProductID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Category");
-
-                    b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("my_Ecommerce_App.Models.Category", b =>
-                {
-                    b.Navigation("ProductCategorys");
-                });
-
             modelBuilder.Entity("my_Ecommerce_App.Models.Order", b =>
                 {
                     b.Navigation("CartItems");
-                });
-
-            modelBuilder.Entity("my_Ecommerce_App.Models.Product", b =>
-                {
-                    b.Navigation("ProductCategorys");
                 });
 
             modelBuilder.Entity("my_Ecommerce_App.Models.User", b =>

@@ -1,0 +1,57 @@
+@model List<Category>
+@{
+    ViewData["Title"] = "Categories";
+}
+
+@section Heads{
+    <style>
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+
+        }
+
+        .cat-card {
+            border: 1px solid #ededed;
+            width: 20%;
+            height: 26vh;
+            text-align: center;
+            padding: 2% 0%;
+            cursor: pointer;
+            transition: 0.3s;
+
+        }
+
+        .cat-card:hover {
+            border: 1px solid transparent;
+            box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, .1);
+        }
+
+        a p:hover {
+            color: var(--my-primary-color);
+        }
+    </style>
+}
+
+
+<h4 class="mb-3">@ViewData["Title"]</h4>
+
+<div class="cards-container">
+
+
+    @foreach (var cat in @Model)
+    {
+        var imgsrc = Image.ByteArrayToSrc(cat.Image);
+        <div class="rounded-2 cat-card me-3 mb-3">
+            <a asp-action="Category" asp-route-id="@cat.ID">
+                <img src="@imgsrc" class="w-50" alt="">
+                <p class="fw-bold">@cat.Name</p>
+                <p>View all</p>
+            </a>
+        </div>
+    }
+
+
+
+</div>
