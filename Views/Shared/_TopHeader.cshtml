@@ -1,96 +1,176 @@
 @{
     var Name = User?.Identity!.Name ?? "Guest";
+    decimal TotalPrice = 0m;
+    int cartItemsNum = 0;
+
+    if (User!.Identity!.IsAuthenticated)
+    {
+        foreach (CartItem item in ViewBag.Carts)
+        {
+            cartItemsNum++;
+            TotalPrice += item.Price * item.Amount;
+        }
+    }
 }
 
 
-<div class="d-flex justify-content-between align-items-center py-4 mx-4">
-
-    <div>
-        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="/images/logo6.jpg" style="width:130px;height:50px;" alt=""></a>
-    </div>
+<div class="w-100 bg-white">
 
 
+    <div class="d-flex justify-content-between align-items-center py-4 mx-4 bg-white">
 
-    <div class="my-search-div d-flex w-50 my-border rounded-2 align-items-center h-100">
-        <form class="d-flex w-100" role="search">
-            <div class="d-flex w-100 py-1 ">
-                <select class="cat-select border border-0 ms-3 px-1 text-truncate" style="max-width: 20%;">
-                    <option value="1">category1</option>
-                    <option value="2">category2</option>
-                    <option value="2">category2</option>
-                    <option value="3">category3</option>
-                    <option value="4">category4</option>
-                    <option value="5">category5category5category5</option>
-                </select>
+        <div>
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="/images/logo6.jpg" style="width:130px;height:50px;" alt=""></a>
+        </div>
 
 
-                <input class="form-control my-search-input" type="search" placeholder="Enter keywords to search..." aria-label="Search">
+
+        <div class="my-search-div d-flex w-50 my-border rounded-2 align-items-center h-100">
+            <form class="d-flex w-100" role="search" asp-controller="Categories" asp-action="Category">
+                <div class="d-flex w-100 py-1 ">
+                    <select class="cat-select border border-0 ms-3 px-1 text-truncate" style="max-width: 20%;" name="ID">
+                        <option value="0" class="my-1 py-1" selected>All</option>
+
+                        @foreach (Category cat in ViewBag.cats)
+                        {
+                            <option value="@cat.ID" class="my-1 py-1">@cat.Name</option>
+                        }
+
+
+                    </select>
+
+                    <input class="form-control my-search-input" type="search" placeholder="Enter keywords to search..." name="name" aria-label="Search">
+
+                </div>
+                <button class="my-search-btn px-3" type="submit"><i class="bi bi-search fs-4"></i></button>
+            </form>
+        </div>
+
+
+        <div class="position-relative border border-dark-subtle rounded-4">
+            <div class="position-absolute top-50 start-0 translate-middle icon-wrapper border border-dark-subtle rounded-circle d-flex justify-content-center align-items-center bg-white">
+                <i class="bi bi-person fs-4 mx-auto"></i>
+            </div>
+
+            <div class=" py-3 px-4">
+                <p class="my-0" style="font-size: 13px;">Hello @Name</p>
+
+
+
+                @if (User!.Identity!.IsAuthenticated)
+                {
+                    <div class="dropdown">
+                        <p class="my-0 dropdown-toggle">My Account</p>
+                        <ul class="dropdown-menu py-2">
+                            <li>
+                                <a class="dropdown-item" asp-controller="Account" asp-action="Profile">Profile</a>
+                            </li>
+                            <li><a class="dropdown-item" href="#">My Wish List</a></li>
+                            <li>
+                                <a class="dropdown-item" asp-controller="Account" asp-action="Logout">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                }
+                else
+                {
+                    <div class="dropdown">
+                        <p class="my-0 dropdown-toggle">My Account</p>
+                        <ul class="dropdown-menu py-2">
+                            <li>
+                                <a class="dropdown-item" asp-controller="Account" asp-action="Register">Register</a>
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item" asp-controller="Account" asp-action="Login">Login</a>
+                            </li>
+                        </ul>
+                    </div>
+                }
+
 
             </div>
-            <button class="my-search-btn px-3" type="submit"><i class="bi bi-search fs-4"></i></button>
-        </form>
-    </div>
-
-
-    <div class="position-relative border border-dark-subtle rounded-4">
-        <div class="position-absolute top-50 start-0 translate-middle icon-wrapper border border-dark-subtle rounded-circle d-flex justify-content-center align-items-center bg-white">
-            <i class="bi bi-person fs-4 mx-auto"></i>
         </div>
 
-        <div class=" py-3 px-4">
-            <p class="my-0" style="font-size: 13px;">Hello @Name</p>
+
+
+        <div class="position-relative border border-dark-subtle rounded-4 px-3">
+            <div class="position-absolute top-50 start-0 translate-middle icon-wrapper border border-dark-subtle rounded-circle d-flex justify-content-center align-items-center bg-white">
+                <i class="bi bi-cart2 fs-4 mx-auto"></i>
+
+                <span class="position-absolute top-0 end-0 rounded-5 fs-6 d-flex justify-content-center align-items-center" style="width:20px;height:20px;background-color:red;color:white">
+                    @cartItemsNum
+                </span>
+            </div>
+
+
+            <div class="my-cart py-3 px-4">
+                <p class="my-0">My Cart</p>
+                <p class="my-0 fw-bold">$@TotalPrice</p>
+                <div class=" py-3 px-4 my-cart-dialouge rounded-3 shadow">
+                    @if (cartItemsNum < 1)
+                    {
+                        <span>You have no items in your shopping cart.</span>
+                    }
+                    else
+                    {
+                        <div class="d-flex justify-content-between py-3">
+                            <p><span class="fw-bolder">@cartItemsNum</span> items in cart</p>
+                            <p>Cart subtotal:
+                                <br>
+                                <span class="fw-bolder">$@TotalPrice</span>
+                            </p>
+                        </div>
 
 
 
-            @if (User!.Identity!.IsAuthenticated)
-            {
-                <div class="dropdown">
-                    <p class="my-0 dropdown-toggle">My Account</p>
-                    <ul class="dropdown-menu py-2">
-                        <li>
-                            <a class="dropdown-item" asp-controller="Account" asp-action="Profile">Profile</a>
-                        </li>
-                        <li><a class="dropdown-item" href="#">My Wish List</a></li>
-                        <li>
-                            <a class="dropdown-item" asp-controller="Account" asp-action="Logout">Logout</a>
-                        </li>
-                    </ul>
+                        <div class="cart-details-sm">
+                            @foreach (CartItem item in ViewBag.Carts)
+                            {
+                                @* Console.WriteLine($"{item.Product?.Image is null}"); *@
+
+                                var imgsrc = Image.ByteArrayToSrc(item!.Product!.Image!);
+
+                                <div class="d-flex">
+                                    <div class="cart-pro-img w-25">
+                                        <img class="w-100" src="@imgsrc" alt="">
+                                    </div>
+
+                                    <div class="cart-inner-details w-75">
+                                        <p>@item.Product.Name</p>
+                                        <p class="fw-bolder">$@item.Price</p>
+                                        <div class="d-flex justify-content-between w-100">
+
+                                            <form asp-controller="Cart" asp-action="Update" method="post" class="w-75">
+                                                <div class="d-flex align-items-center">
+                                                    <input type="number" name="proid" value="@item.ProductID" hidden>
+                                                    <input type="number" name="itemid" value="@item.ID" hidden>
+                                                    <span class="me-1">Qty: </span>
+                                                    <input type="number" name="amount" min="1" value="@item.Amount" oldvalue="@item.Amount" style="display: inline-block; width:40px" class="amount-in me-2">
+                                                    <button type="submit" class="update-amount-btn rounded-3" hidden>Update</button>
+                                                </div>
+                                            </form>
+
+                                            <form asp-controller="Cart" asp-action="Delete" method="post">
+                                                <input type="num" name="id" value="@item.ID" hidden>
+                                                <button type="submit" class="btn-icon">
+                                                    <i class="fa-regular fa-trash-can"></i></button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            }
+                        </div>
+                        <a type="button" asp-action="ProccessOrder" asp-controller="Cart" class="w-100 pmnt-btn rounded-2 mb-2">
+                            Proceed To Checkout
+                        </a>
+                    }
                 </div>
-            }
-            else
-            {
-                <div class="dropdown">
-                    <p class="my-0 dropdown-toggle">My Account</p>
-                    <ul class="dropdown-menu py-2">
-                        <li>
-                            <a class="dropdown-item" asp-controller="Account" asp-action="Register">Register</a>
-                        </li>
 
-                        <li>
-                            <a class="dropdown-item" asp-controller="Account" asp-action="Login">Login</a>
-                        </li>
-                    </ul>
-                </div>
-            }
-
+            </div>
 
         </div>
+
     </div>
-
-
-
-    <div class="position-relative border border-dark-subtle rounded-4">
-        <div class="position-absolute top-50 start-0 translate-middle icon-wrapper border border-dark-subtle rounded-circle d-flex justify-content-center align-items-center bg-white">
-            <i class="bi bi-cart2 fs-4 mx-auto"></i>
-        </div>
-
-        <div class=" py-3 px-4">
-            <p class="my-0">Hello Guest</p>
-            <p class="my-0">hek</p>
-        </div>
-    </div>
-
-
-
-
 </div>

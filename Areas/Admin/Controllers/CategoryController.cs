@@ -18,12 +18,14 @@ public class CategoryController : Controller
 
 
     [HttpGet]
-    public IActionResult ViewAll()
+    public IActionResult ViewAll(string? name)
     {
-
-
-
-        return View(DB.Categorys.ToList());
+        List<Category>? cats = null;
+        if (name != null)
+            cats = DB.Categorys.Where(c => c.Name!.Contains(name)).ToList();
+        else
+            cats = DB.Categorys.ToList();
+        return View(cats);
     }
 
 
@@ -36,14 +38,31 @@ public class CategoryController : Controller
 
 
     [HttpPost]
-    public IActionResult Add(Category cat, IFormFile ImgFile)
+    public IActionResult Add(Category cat, IFormFile ImgFile, int IsOld)
     {
-        cat.Image = Image.IFormFileToByteArray(ImgFile);
+        if (IsOld == 1 && cat.ID != 0)
+        {
+            using EcommerceDbContext DB2 = new();
+            cat.Image = DB2.Categorys.Find(cat.ID)!.Image;
+        }
+        else
+        {
+            cat.Image = Image.IFormFileToByteArray(ImgFile);
+        }
 
-        DB.Add(cat);
+        DB.Update(cat);
         DB.SaveChanges();
 
         return RedirectToAction("ViewAll");
+    }
+
+
+    [HttpGet]
+    public IActionResult Edit(int ID)
+    {
+        var Editable = DB.Categorys.Find(ID);
+
+        return View("Add", Editable);
     }
 
 

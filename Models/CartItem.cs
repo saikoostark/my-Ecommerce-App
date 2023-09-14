@@ -8,6 +8,7 @@ public class CartItem
 
     [Column(TypeName = "decimal(18, 2)")]
     public decimal Price { get; set; }
+    public int Amount { get; set; }
 
     public int ProductID { get; set; }
     public Product? Product { get; set; }

@@ -15,6 +15,11 @@ main {
   overflow-y: hidden;
 }
 
+.btn-icon{
+  border: none;
+  background-color: transparent;
+}
+
 .dropdown-toggle { outline: 0; }
 
 .btn-toggle {

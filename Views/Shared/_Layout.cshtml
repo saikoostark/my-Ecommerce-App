@@ -19,6 +19,11 @@
 </head>
 
 <body>
+
+    @{
+
+    }
+
     <header class="my-0">
 
         <partial name="_TopHeader" />
@@ -132,8 +137,22 @@
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 
     <script>
+        const inputNumbers = document.querySelectorAll('.amount-in');
 
+        // Create an array to store the initial values of the inputs
+        // const initialValues = Array.from(inputNumbers).map(input => input.value);
 
+        // Add event listeners to each input
+        inputNumbers.forEach((input, index) => {
+            input.addEventListener('change', () => {
+                const currentValue = input.value;
+                if (currentValue !== input.getAttribute("oldvalue")) {
+                    input.parentElement.querySelector(".update-amount-btn").removeAttribute("hidden");
+                } else {
+                    input.parentElement.querySelector(".update-amount-btn").setAttribute("hidden", "");
+                }
+            });
+        });
 
     </script>
 

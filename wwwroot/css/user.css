@@ -8,6 +8,8 @@
     margin: 0px;
 }
 
+
+
 /* 
 
 nav{
@@ -63,7 +65,7 @@ nav{
 }
 
 .icon-wrapper {
-    overflow: hidden;
+    /* overflow:auto; */
     width: 40px;
     height: 40px;
 }
@@ -154,4 +156,88 @@ body:has(.my-search-btn:hover) .cat-select {
 
 .display-me-none{
     visibility: hidden;
+}
+
+
+
+.my-cart {
+    position: relative;
+}
+
+.my-cart-dialouge {
+    position: absolute;
+    z-index: -2;
+    background-color: white;
+    left: -300px;
+    min-height: 130px;
+    width: 400px;
+    box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, .1);
+    text-align: center;
+    transform: translateY(-25px);
+    transition: z-index 0s , background-color 0s, transform 0.6s, opacity 0.6s;
+    visibility: hidden;
+    opacity: 0;
+}
+
+
+
+.my-cart:hover .my-cart-dialouge{
+    z-index: 3;
+    visibility: visible;
+    transform: translateY(15px);
+    opacity: 1;
+    
+}
+
+
+.pmnt-btn{
+    background-color: #444;
+    color:white;
+    font-size:larger;
+    border : none;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.pmnt-btn:hover{
+    background-color: #333;
+}
+
+
+.cart-details-sm{
+    max-height: 30vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+
+.cart-inner-details{
+    padding: 15px;
+    text-align: start;
+}
+
+.cart-inner-details p{
+    margin: 4px 0px;
+}
+
+
+.vedit-btn{
+    background-color: #bbb;
+    font-size:medium;
+    border : none;
+    padding: 7px;
+    margin-top: 20px;
+
+}
+
+.update-amount-btn{
+    border: none;
+    background-color: #999;
+    padding: 5px;
+    color: white;
+}
+
+.update-amount-btn:hover{
+    background-color: #666;
+
 }

@@ -7,16 +7,17 @@ using my_Ecommerce_App.Models;
 using my_Ecommerce_App.Utils;
 using my_Ecommerce_App.ViewModels;
 using my_Ecommerce_App.Areas.Admin.Controllers;
+using Microsoft.EntityFrameworkCore;
 
 namespace my_Ecommerce_App.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly EcommerceDbContext dbContext;
+        private readonly EcommerceDbContext DB;
 
         public AccountController(ILogger<AccountController> logger)
         {
-            dbContext = new();
+            DB = new();
         }
 
         [HttpGet]
@@ -24,6 +25,9 @@ namespace my_Ecommerce_App.Controllers
         {
             if (HttpContext.User.Identity!.IsAuthenticated)
                 return LocalRedirect("/");
+
+
+            ViewBag.cats = DB.Categorys.ToList();
 
             RegisterUser user = new();
             return View(user);
@@ -33,6 +37,8 @@ namespace my_Ecommerce_App.Controllers
         [HttpPost]
         public IActionResult Register(RegisterUser reguser)
         {
+            ViewBag.cats = DB.Categorys.ToList();
+
             if (!ModelState.IsValid)
                 return View(reguser);
 
@@ -49,8 +55,8 @@ namespace my_Ecommerce_App.Controllers
                 Role = "RegularUser",
 
             };
-            dbContext.Users.Add(user);
-            dbContext.SaveChanges();
+            DB.Users.Add(user);
+            DB.SaveChanges();
 
             return LocalRedirect("/Account/Login");
         }
@@ -59,6 +65,9 @@ namespace my_Ecommerce_App.Controllers
         [HttpGet]
         public IActionResult Login(string returnUrl = "/")
         {
+            ViewBag.cats = DB.Categorys.ToList();
+
+
             if (HttpContext.User.Identity!.IsAuthenticated)
                 return LocalRedirect("/");
 
@@ -66,6 +75,8 @@ namespace my_Ecommerce_App.Controllers
             {
                 ReturnUrl = returnUrl
             };
+            ViewBag.cats = DB.Categorys.ToList();
+
             return View(user);
         }
 
@@ -73,6 +84,9 @@ namespace my_Ecommerce_App.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginUser user)
         {
+            ViewBag.cats = DB.Categorys.ToList();
+
+
             ViewBag.InvalidCred = "username / Email does not match password";
             if (!ModelState.IsValid)
                 return View(user);
@@ -80,13 +94,13 @@ namespace my_Ecommerce_App.Controllers
             User? loggedUser = null;
             if (UserUtiles.IfEmail(user?.UserNameOrEmail))
             {
-                loggedUser = dbContext.Users.FirstOrDefault(u => u.Email == (user!.UserNameOrEmail ?? ""));
+                loggedUser = DB.Users.FirstOrDefault(u => u.Email == (user!.UserNameOrEmail ?? ""));
                 if (loggedUser == null)
                     return View(user);
             }
             else
             {
-                loggedUser = dbContext.Users.FirstOrDefault(u => u.UserName == (user!.UserNameOrEmail ?? ""));
+                loggedUser = DB.Users.FirstOrDefault(u => u.UserName == (user!.UserNameOrEmail ?? ""));
                 if (loggedUser == null)
                     return View(user);
             }
@@ -101,7 +115,7 @@ namespace my_Ecommerce_App.Controllers
 
 
             var claims = new List<Claim>(){
-                new(ClaimTypes.NameIdentifier, loggedUser!.UserName!),
+                new(ClaimTypes.NameIdentifier, loggedUser!.ID.ToString()),
                 new(ClaimTypes.Name, loggedUser!.UserName!),
                 new(ClaimTypes.Email, loggedUser!.Email!),
                 new(ClaimTypes.Role, loggedUser!.Role!),
@@ -133,6 +147,19 @@ namespace my_Ecommerce_App.Controllers
         [Authorize]
         public IActionResult Profile()
         {
+            ViewBag.cats = DB.Categorys.ToList();
+
+
+            if (User!.Identity!.IsAuthenticated)
+            {
+                var userid = ((ClaimsIdentity)User!.Identity!).Claims
+                        .Where(c => c.Type == ClaimTypes.NameIdentifier)
+                        .Select(c => c.Value).FirstOrDefault();
+
+                int UserID = int.Parse(userid!);
+                ViewBag.Carts = DB.CartItems.Include(c => c.Product).Where(c => c.UserID == UserID && c.OrderID == null);
+            }
+
             return View();
         }
 

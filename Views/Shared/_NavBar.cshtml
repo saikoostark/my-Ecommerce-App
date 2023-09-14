@@ -8,13 +8,15 @@
                     <i class="bi bi-layout-text-sidebar me-1"></i>Shop by Categories
                 </p>
                 <ul class="dropdown-menu py-2">
-                    <li>
-                        <a class="dropdown-item" asp-controller="Account" asp-action="Profile">Profile</a>
-                    </li>
-                    <li><a class="dropdown-item" href="#">My Wish List</a></li>
-                    <li>
-                        <a class="dropdown-item" asp-controller="Account" asp-action="Logout">Logout</a>
-                    </li>
+                    @foreach (Category cat in ViewBag.cats)
+                    {
+                        <li>
+                            <a class="dropdown-item" asp-controller="Categories" asp-action="Category" asp-route-id="@cat.ID">
+                                @cat.Name
+                            </a>
+                        </li>
+
+                    }
                 </ul>
             </div>
         </div>
@@ -25,10 +27,10 @@
                     <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                 </li>
                 <li class="nav-item d-flex">
-                    <a class="nav-link text-light" asp-area="Admin" asp-controller="Product" asp-action="Add">Shop</a>
+                    <a class="nav-link text-light" asp-controller="Shop" asp-action="Index">Shop</a>
                 </li>
                 <li class="nav-item d-flex">
-                    <a class="nav-link text-light" asp-area="Admin" asp-controller="Product" asp-action="Index">Categories</a>
+                    <a class="nav-link text-light" asp-controller="Categories" asp-action="Index">Categories</a>
                 </li>
                 <li class="nav-item d-flex">
                     <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">About Us</a>

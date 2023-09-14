@@ -6,16 +6,16 @@
 @section Heads{
     <style>
         .cards-container {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, 200px);
             justify-content: space-between;
 
         }
 
         .cat-card {
             border: 1px solid #ededed;
-            width: 20%;
-            height: 26vh;
+            width: 200px;
+            height: 30vh;
             text-align: center;
             padding: 2% 0%;
             cursor: pointer;
@@ -35,7 +35,7 @@
 }
 
 
-<h4 class="mb-3">@ViewData["Title"]</h4>
+<h3 class="my-3">@ViewData["Title"]</h3>
 
 <div class="cards-container">
 
@@ -43,13 +43,13 @@
     @foreach (var cat in @Model)
     {
         var imgsrc = Image.ByteArrayToSrc(cat.Image);
-        <div class="rounded-2 cat-card me-3 mb-3">
-            <a asp-action="Category" asp-route-id="@cat.ID">
+        <a asp-action="Category" asp-route-id="@cat.ID">
+            <div class="rounded-2 cat-card me-3 mb-3">
                 <img src="@imgsrc" class="w-50" alt="">
-                <p class="fw-bold">@cat.Name</p>
+                <p class="fw-bold mt-3">@cat.Name</p>
                 <p>View all</p>
-            </a>
-        </div>
+            </div>
+        </a>
     }
 
 

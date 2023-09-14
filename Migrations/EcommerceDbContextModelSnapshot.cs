@@ -45,6 +45,9 @@ namespace my_Ecommerce_App.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
                     b.Property<int?>("OrderID")
                         .HasColumnType("int");
 
@@ -190,10 +193,10 @@ namespace my_Ecommerce_App.Migrations
                             ID = 1,
                             Address = "rgregrgrjgire",
                             Email = "saikoo@gmail.com",
-                            HashedPassword = "pEoYUEeLv6e4bvCNGKGUrYyfkUg215qAYwGOf8Q1xzs=",
+                            HashedPassword = "S2QTlbASLbYr4fnGtnZQtD7qGjq1AS99dPCV7bBl/GA=",
                             Phone = "+201125001709",
                             Role = "AdminUser",
-                            Salt = "mFeKhTpMtPIKDa2SEBDe6g==",
+                            Salt = "UiO9PivKRmZ4D3FgBbBdnQ==",
                             UserName = "saikoo10"
                         },
                         new
@@ -201,10 +204,10 @@ namespace my_Ecommerce_App.Migrations
                             ID = 2,
                             Address = "rgregrgrjgire",
                             Email = "saikoo@gmail.com",
-                            HashedPassword = "PkYC6vb+ChNK4bmXojtUYOk9qaq1wIJq1uNxwDKklmw=",
+                            HashedPassword = "dwJ+HHEAM6E0ddfjUqqr2pC4Otj6p95NVSHNxzz476g=",
                             Phone = "+201125001709",
                             Role = "RegularUser",
-                            Salt = "8/qc6ZFJrfeysVjf4f5ljA==",
+                            Salt = "P4K3ZbX748fMOHFPGrsDQQ==",
                             UserName = "saikoo123"
                         });
                 });

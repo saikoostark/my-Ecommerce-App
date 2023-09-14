@@ -1,91 +1,93 @@
 @model List<Category>
-    @{
+@{
     ViewData["Title"] = "View All Category";
     var MyType = typeof(Category);
-    }
+}
 
 
-    <h1 class="bg-white px-4 py-3 fs-1 fw-bolder rounded-4 my-3 shadow-sm">@ViewData["Title"] </h1>
+<h1 class="bg-white px-4 py-3 fs-1 fw-bolder rounded-4 my-3 shadow-sm">@ViewData["Title"] </h1>
 
 
-    <div class="px-2 d-flex justify-content-between py-1 mb-4">
-        <a asp-area="Admin" asp-controller="Category" asp-action="Add" class="btn btn-success px-3 mt-2 py-2 rounded-4 fs-5">Add New Category <i class="fa-solid fa-circle-plus ms-2"></i></a>
+<div class="px-2 d-flex justify-content-between py-1 mb-4">
+    <a asp-area="Admin" asp-controller="Category" asp-action="Add" class="btn btn-success px-3 mt-2 py-2 rounded-4 fs-5">Add New Category <i class="fa-solid fa-circle-plus ms-2"></i></a>
 
 
-        <div class="my-search-div d-flex w-25 my-border rounded-2 align-items-center bg-white py-0">
-            <form class="d-flex w-100" role="search">
-                <div class="d-flex w-100">
+    <div class="my-search-div d-flex w-25 my-border rounded-2 align-items-center bg-white py-0">
+        <form class="d-flex w-100" role="search">
+            <div class="d-flex w-100">
 
-                    <input class="py-0 px-1 form-control my-search-input my-search-input-admin" type="search" placeholder="Search Category" aria-label="Search">
+                <input class="py-0 px-1 form-control my-search-input my-search-input-admin" type="search" placeholder="Search Category" aria-label="Search" name="name">
 
-                </div>
-                <button class="my-search-btn px-3 py-2 h-100" type="submit"><i class="bi bi-search fs-3"></i></button>
+            </div>
+            <button class="my-search-btn px-3 py-2 h-100" type="submit"><i class="bi bi-search fs-3"></i></button>
 
-            </form>
-        </div>
-
+        </form>
     </div>
 
+</div>
 
 
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <form method="post" action="Delete">
-                        <input type="number" name="ID" value="0" id="ID" hidden>
-                        <button type="button" class="btn btn-secondary closeing" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                    </form>
-                </div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                are you sure you want to delete ?
+            </div>
+            <div class="modal-footer">
+                <form method="post" asp-area="Admin" asp-controller="Category" asp-action="Delete">
+                    <input type="number" name="ID" value="0" id="ID" hidden>
+                    <button type="button" class="btn btn-secondary closeing" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Delete</button>
+                </form>
             </div>
         </div>
     </div>
+</div>
 
 
 
 
-    <div class="my-4 py-4 shadow-sm rounded-2 bg-white px-3">
+<div class="my-4 py-4 shadow-sm rounded-2 bg-white px-3">
 
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Category Name</th>
-                    <th scope="col">Image</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @for (int i = 0; i < Model?.Count; i++) { <tr my-itemid="@Model[i].ID">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Category Name</th>
+                <th scope="col">Image</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model?.Count; i++)
+            {
+                <tr my-itemid="@Model[i].ID">
                     @foreach (var property in
-                    @MyType.GetProperties().SkipLast(1).ToList())
+                   @MyType.GetProperties().SkipLast(1).ToList())
                     {
-                    @if (@property.Name == "Image")
-                    {
-                    @if (@Model[i]?.Image != null)
-                    {
-                    string? imgSrc = Image.ByteArrayToSrc(@Model[i]?.Image);
-                    <td><img src="@imgSrc" class="rounded-circle" style="width: 50px; height: 50px" alt="Image"></td>
-                    }
-                    else
-                    {
-                    <td>No Image</td>
-                    }
-                    }
-                    else
-                    {
-                    <td>@Model[i]?.GetType()?.GetProperty(property.Name)?.GetValue(Model[i])</td>
-                    }
+                        @if (@property.Name == "Image")
+                        {
+                            @if (@Model[i]?.Image != null)
+                            {
+                                string? imgSrc = Image.ByteArrayToSrc(@Model[i]?.Image);
+                                <td><img src="@imgSrc" class="rounded-circle" style="width: 50px; height: 50px" alt="Image"></td>
+                            }
+                            else
+                            {
+                                <td>No Image</td>
+                            }
+                        }
+                        else
+                        {
+                            <td>@Model[i]?.GetType()?.GetProperty(property.Name)?.GetValue(Model[i])</td>
+                        }
                     }
                     <td>
                         <div class="dropdown">
@@ -94,18 +96,18 @@
                             </button>
                             <ul class="dropdown-menu">
                                 <li><a type="button" class="dropdown-item">Details</a></li>
-                                <li><a type="button" class="dropdown-item">Edit</a></li>
+                                <li><a type="button" href="Edit/@Model[i].ID" class="dropdown-item">Edit</a></li>
                                 <li><a type="button" class="dropdown-item delete-item" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</a></li>
                             </ul>
                         </div>
                     </td>
-                    </tr>
-                    }
-            </tbody>
-        </table>
-    </div>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
-    @section CustomBody{
+@section CustomBody{
 
     <script>
 
@@ -123,4 +125,4 @@
 
 
     </script>
-    }
+}

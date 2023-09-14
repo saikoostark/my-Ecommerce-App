@@ -11246,11 +11246,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\my_mvc_project_details\\my-Ecommerce-App\\my-Ecommerce-App.csproj",
+      "projectUniqueName": "d:\\my_mvc_project_details\\my-Ecommerce-App\\my-Ecommerce-App.csproj",
       "projectName": "my-Ecommerce-App",
-      "projectPath": "D:\\my_mvc_project_details\\my-Ecommerce-App\\my-Ecommerce-App.csproj",
+      "projectPath": "d:\\my_mvc_project_details\\my-Ecommerce-App\\my-Ecommerce-App.csproj",
       "packagesPath": "C:\\Users\\alwky\\.nuget\\packages\\",
-      "outputPath": "D:\\my_mvc_project_details\\my-Ecommerce-App\\obj\\",
+      "outputPath": "d:\\my_mvc_project_details\\my-Ecommerce-App\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\alwky\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -11315,7 +11315,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }

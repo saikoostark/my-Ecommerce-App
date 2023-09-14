@@ -10,6 +10,8 @@ public class EcommerceDbContext : DbContext
     public DbSet<Order> Orders { get; set; }
     public DbSet<Product> Products { get; set; }
     public DbSet<Category> Categorys { get; set; }
+
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseSqlServer(@"Server=SAIKOO\SAIKOO;Database=Ecommerce;Trusted_connection=True;Encrypt=False;");
@@ -17,6 +19,8 @@ public class EcommerceDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+
+
         var salt1 = Hasher.GenerateSalt();
         var pass1 = "Ben1000";
         var hashed1 = Hasher.GenerateHash(pass1, salt1);

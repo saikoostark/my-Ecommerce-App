@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using my_Ecommerce_App.Models;
 using my_Ecommerce_App.Utils;
 
@@ -18,10 +19,15 @@ public class ProductController : Controller
 
 
     [HttpGet]
-    public IActionResult ViewAll()
+    public IActionResult ViewAll(string? name)
     {
 
-        return View(DB.Products.ToList());
+        List<Product>? prods = null;
+        if (name != null)
+            prods = DB.Products.Where(p => p.Name!.Contains(name)).ToList();
+        else
+            prods = DB.Products.ToList();
+        return View(prods);
     }
 
 
@@ -36,26 +42,50 @@ public class ProductController : Controller
 
 
     [HttpPost]
-    public IActionResult Add(Product prod, IFormFile ImgFile, List<int>? Categories)
+    public IActionResult Add(Product prod, IFormFile ImgFile, List<int>? Categories, int IsOld)
     {
-        prod.Image = Image.IFormFileToByteArray(ImgFile);
-
-        prod.Categorys = new HashSet<Category>();
-
-        foreach (var item in Categories!)
+        if (IsOld == 1 && prod.ID != 0)
         {
-            var found = DB.Categorys.Find(item);
-            if (found != null)
+            using EcommerceDbContext DB2 = new();
+            prod.Image = DB2.Products.Find(prod.ID)!.Image;
+        }
+        else
+        {
+            prod.Image = Image.IFormFileToByteArray(ImgFile);
+        }
+
+        if (prod.ID == 0)
+        {
+            prod.Categorys = new HashSet<Category>();
+
+            foreach (var item in Categories!)
             {
-                prod.Categorys.Add(found);
+                var found = DB.Categorys.Find(item);
+                if (found != null)
+                {
+                    prod.Categorys.Add(found);
+                }
             }
         }
 
-        DB.Add(prod);
+
+
+
+        DB.Update(prod);
         DB.SaveChanges();
 
         return RedirectToAction("ViewAll");
     }
+
+    [HttpGet]
+    public IActionResult Edit(int ID)
+    {
+        var Editable = DB.Products.Include(p => p.Categorys).FirstOrDefault(p => p.ID == ID);
+        ViewBag.Categories = DB.Categorys.ToList();
+        return View("Add", Editable);
+    }
+
+
 
 
     [HttpPost]

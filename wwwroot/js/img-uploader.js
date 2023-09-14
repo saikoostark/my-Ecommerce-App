@@ -1,8 +1,8 @@
 $(".image-uploader").change( (e) => { 
     et = e.target;
 
+    $("#IsOld").attr("value", "0");
     const file = et.files[0];
-    console.log(file);
     if (file) {
         const reader = new FileReader();
 
@@ -20,12 +20,3 @@ $(".image-uploader").change( (e) => {
 });
 
 
-// $(".my-rm-btn").click(function (e) { 
-//     e.preventDefault();
-//     console.log($(".image-uploader").attr("value"));
-//     $(".img-uploader").attr('value', '');
-//     $(".uploadButton").css("background-image", `url(${"/images/add_image.png"})`);
-//     $(".my-img-drop").css("visibility", "hidden");
-
-//     console.log($(".image-uploader").attr("value"));
-// });

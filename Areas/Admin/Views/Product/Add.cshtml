@@ -1,7 +1,12 @@
 @model Product
 @{
     ViewData["Title"] = "Add Product";
+    string? catImg = "/images/add_image.png";
 
+    if (Model?.Image is not null)
+    {
+        catImg = Image.ByteArrayToSrc(Model.Image);
+    }
 }
 
 @section CustomHead {
@@ -39,8 +44,8 @@
 <div class="py-4 fw-bolder d-flex justify-content-center w-100">
 
 
-    <form class="d-flex w-100 h-100 justify-content-center align-items-center" enctype="multipart/form-data" action="Add" method="post">
-
+    <form class="d-flex w-100 h-100 justify-content-center align-items-center" enctype="multipart/form-data" asp-action="Add" method="post">
+        <input asp-for="ID" class="form-control" hidden>
         <div class="mb-3 bg-white px-3 py-3 rounded-4 shadow-sm w-75">
 
             <h4 class="px-2 py-2">Product Details</h4>
@@ -72,7 +77,8 @@
                 </div>
 
                 <div class="w-50 position-relative">
-                    <div class="uploadButton mb-3 h-100 ">
+                    <div class="uploadButton mb-3 h-100 " style="background-image: url(@catImg);">
+                        <input type="number" name="IsOld" value="1" id="IsOld" hidden>
                         <input name="ImgFile" type="file" class="image-uploader" id="image" accept="image/*">
                     </div>
                 </div>
@@ -84,7 +90,14 @@
                 <select id="countries" multiple name="Categories">
                     @foreach (Category cat in @ViewBag.Categories)
                     {
-                        <option value="@cat.ID">@cat.Name</option>
+                        if (@Model?.Categorys?.FirstOrDefault(c => c.ID == cat.ID) is not null)
+                        {
+                            <option value="@cat.ID" selected>@cat.Name</option>
+                        }
+                        else
+                        {
+                            <option value="@cat.ID">@cat.Name</option>
+                        }
                     }
                 </select>
 
@@ -92,10 +105,11 @@
 
             <div class="px-2 my-2">
                 <label asp-for="Description" class="form-label w-100">Description</label>
-                <textarea asp-for="Description" class="w-100" style="height: 10vh;"></textarea>
+                <textarea asp-for="Description" class="w-100 rounded-3 p-2" style="height: 10vh;"></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary py-2">Submit</button>
+            <button type="submit" class="btn btn-primary py-2 ">Submit</button>
+            <a asp-area="Admin" asp-controller="Product" asp-action="ViewAll" type="button" class="btn btn-secondary py-2 ms-3">Return Back</a>
         </div>
 
     </form>

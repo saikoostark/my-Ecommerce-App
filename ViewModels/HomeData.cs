@@ -5,4 +5,6 @@ namespace my_Ecommerce_App.ViewModels;
 public class HomeData
 {
     public List<Category>? Categories { get; set; }
+    public List<CartItem>? CartItems { get; set; }
+
 }

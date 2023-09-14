@@ -1,7 +1,12 @@
 @model Category
 @{
     ViewData["Title"] = "Add Category";
+    string? catImg = "/images/add_image.png";
 
+    if (Model?.Image is not null)
+    {
+        catImg = Image.ByteArrayToSrc(Model.Image);
+    }
 }
 
 @section CustomHead {
@@ -39,19 +44,22 @@
 }
 
 
+
 <h1 class="bg-white px-4 py-3 fs-1 fw-bolder rounded-4 my-3 shadow-sm">@ViewData["Title"] </h1>
 
 <div class="bg-white h-50 px-4 py-4 fw-bolder rounded-4 shadow-sm">
 
 
-    <form class="d-flex w-100 h-100 justify-content-center align-items-center" enctype="multipart/form-data" action="Add" method="post">
+    <form class="d-flex w-100 h-100 justify-content-center align-items-center" enctype="multipart/form-data" asp-action="Add" method="post">
 
 
 
         <div>
             <div class="mb-3 position-relative">
                 <label for="image" class="form-label">Category image</label>
-                <div class="uploadButton mb-3 ">
+
+                <div class="uploadButton mb-3 " style="background-image: url(@catImg);">
+                    <input type="number" name="IsOld" value="1" id="IsOld" hidden>
                     <input name="ImgFile" type="file" class="image-uploader" id="image" accept="image/*">
 
                     <div class="dropdown dropend position-absolute top-0 end-0 my-img-drop">
@@ -66,10 +74,12 @@
             </div>
 
             <div class="mb-3">
+                <input asp-for="ID" class="form-control" hidden>
                 <label asp-for="Name" class="form-label">Category name</label>
                 <input asp-for="Name" class="form-control" id="cat-name">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
+            <a asp-area="Admin" asp-controller="Category" asp-action="ViewAll" type="button" class="btn btn-secondary py-2 ms-3">Return Back</a>
         </div>
 
     </form>

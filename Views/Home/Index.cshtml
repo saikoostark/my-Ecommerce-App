@@ -64,39 +64,89 @@
 
 
 
-<div class="categories">
-    <div class="swiper mySwiper">
+<div class="categories mb-4">
+    <div class="swiper catSwiper">
         <div class="swiper-wrapper">
 
             @foreach (Category cat in Model.Categories!)
             {
                 var imgsrc = Image.ByteArrayToSrc(cat.Image);
                 <div class="swiper-slide">
-                    <img src="@imgsrc" alt="">
-                    <p>@cat.Name</p>
+                    <a href="/categories/category/@cat.ID">
+                        <img src="@imgsrc" alt="">
+                        <p>@cat.Name</p>
+                    </a>
                 </div>
             }
 
         </div>
 
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
+        <div class="catSwiper-button-prev"></div>
+        <div class="catSwiper-button-next"></div>
 
 
     </div>
 </div>
 
 
+
+
+@* <h3>Recommended For You</h3>
+
+<div class="recommended">
+    <div class="swiper proSwiper">
+        <div class="swiper-wrapper">
+
+            @foreach (Product pro in ViewBag.pros!)
+            {
+                var imgsrc = Image.ByteArrayToSrc(pro.Image);
+                <div class="swiper-slide">
+                    <a href="/categories/category/@pro.ID">
+                        <img src="@imgsrc" alt="">
+                        <p>@pro.Name</p>
+                    </a>
+                </div>
+            }
+
+        </div>
+
+        <div class="proswiper-button-prev"></div>
+        <div class="proswiper-button-next"></div>
+
+
+    </div>
+</div> *@
+
+
 @section Scripts{
     <script src="~/js/swiper-bundle.min.js"></script>
     <script>
-        var swiper = new Swiper(".mySwiper", {
+        var swiper = new Swiper(".catSwiper", {
             mousewheel: {
                 invert: true,
             },
             navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
+                nextEl: '.catSwiper-button-next',
+                prevEl: '.catSwiper-button-prev',
+            },
+            // loop: true,
+            slidesPerView: 8,
+            spaceBetween: 70,
+        });
+
+
+        var swiper = new Swiper(".proSwiper", {
+            effect: 'coverflow',
+            coverflowEffect: {
+                rotate: 30,
+                slideShadows: true,
+            },
+            mousewheel: {
+                invert: true,
+            },
+            navigation: {
+                nextEl: '.proSwiper-button-next',
+                prevEl: '.proSwiper-button-prev',
             },
             // loop: true,
             slidesPerView: 8,
